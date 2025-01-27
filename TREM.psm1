@@ -2,7 +2,27 @@
 #!/usr/bin/env pwsh
 #region    Classes
 class TREM {
-  TREM() { }
+  # Core Methods
+  static [void] GetInstalledBloatware([bool]$IncludeSystemApps, [string[]]$CustomBloatwareList) {
+    Get-InstalledBloatware -IncludeSystemApps $IncludeSystemApps -CustomBloatwareList $CustomBloatwareList
+  }
+
+  static [void] RemoveBloatware([string[]]$AppName, [bool]$Force) {
+    Remove-Bloatware -AppName $AppName -Force $Force
+  }
+
+  static [void] DisableWindowsTelemetry([string]$Level) {
+    Disable-WindowsTelemetry -Level $Level
+  }
+
+  # Utility Methods
+  static [void] BackupSystemState([string]$Description) {
+    Backup-SystemState -Description $Description
+  }
+
+  static [bool] TestAdminPrivileges() {
+    return Test-AdminPrivileges
+  }
 }
 #endregion Classes
 # Types that will be available to users when they import the module.
